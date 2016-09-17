@@ -1,4 +1,4 @@
-angular.module('FlapperNews', [])
+angular.module('flapperNews', [])
   .controller('MainCtrl', ['$scope', function($scope) {
     $scope.posts = [
       { title: 'post 1', upvotes: 5},
