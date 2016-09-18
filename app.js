@@ -46,6 +46,23 @@ angular.module('flapperNews', ['ui.router'])
   .controller('PostsCtrl', ['$scope', '$stateParams', 'postService', function($scope, $stateParams, postService) {
     index = parseInt($stateParams.id)
     $scope.post = postService.posts[index];
+    $scope.increaseUpVotes = increaseUpVotes;
+    $scope.addComment = addComment;
+
+    function increaseUpVotes(comment) {
+      comment.upvotes += 1;
+    }
+
+    function addComment() {
+      if(!$scope.body || $scope.body==='') return;
+      $scope.post.comments = $scope.post.comments || [];
+      $scope.post.comments.push({
+        body: $scope.body,
+        author: 'user',
+        upvotes: 0
+      });
+      $scope.body = ''
+    }
   }])
   .factory('postService', [function() {
     var obj = {

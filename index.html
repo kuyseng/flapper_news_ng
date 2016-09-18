@@ -19,7 +19,6 @@
   </div>
 </body>
 <script type='text/ng-template' id='/home.html'>
-  <p>{{posts | json}}</p>
   <div class='page-header'>
     <h1>Flapper News</h1>
     <div ng-repeat='post in posts | orderBy: "-upvotes"'>
@@ -58,5 +57,13 @@
       {{comment.body}}
     <span>
   </div>
+  <form ng-submit='addComment()'>
+    <h3>Add a new comment</h3>
+    <div class='form-group'>
+      <input type='text' ng-model='body' class='form-control'></input>
+    </div>
+    <button type='submit' class='btn btn-primary'>Add Comment</button>
+    <a href='#/home' class='btn btn-default'>Back</a>
+  </form>
 </script>
 </html>
