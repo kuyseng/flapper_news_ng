@@ -1,14 +1,9 @@
 angular.module('flapperNews', [])
-  .controller('MainCtrl', ['$scope', function($scope) {
-    $scope.posts = [
-      { title: 'post 1', upvotes: 5},
-      { title: 'post 2', upvotes: 2},
-      { title: 'post 3', upvotes: 1},
-      { title: 'post 4', upvotes: 3},
-      { title: 'post 5', upvotes: 0}
-    ]
+  .controller('MainCtrl', ['$scope', 'postService', function($scope, postService) {
+    $scope.posts = postService.posts;
     $scope.addPost = addPost;
     $scope.increaseUpVotes = increaseUpVotes;
+    $scope.deletePost = deletePost;
 
     function addPost() {
       if(!$scope.title || $scope.title==='') return;
@@ -20,4 +15,15 @@ angular.module('flapperNews', [])
     function increaseUpVotes(post) {
       post.upvotes += 1;
     }
+
+    function deletePost(index) {
+      $scope.posts.splice(index, 1);
+    }
+  }])
+  .factory('postService', [function() {
+    var obj = {
+      posts: []
+    }
+
+    return obj;
   }])
